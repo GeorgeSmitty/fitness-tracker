@@ -1,110 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Website</title>
-    <meta name="description" content="A basic HTML, CSS, and JavaScript starter website." />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="/src/styles.css" />
-  </head>
-  <body>
-    <header class="site-header">
-      <div class="container header-inner">
-        <a href="#" class="logo">My<span>Site</span></a>
-        <nav class="nav">
-          <a href="#home">Home</a>
-          <a href="#about">About</a>
-          <a href="#features">Features</a>
-          <a href="#contact">Contact</a>
-        </nav>
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-          <span class="theme-icon">Dark</span>
-        </button>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness Goal Tracker</title>
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Fitness Goal Tracker</h1>
 
-    <main>
-      <section id="home" class="hero">
-        <div class="container hero-inner">
-          <p class="eyebrow">Welcome</p>
-          <h1>Build something great with HTML, CSS &amp; JavaScript.</h1>
-          <p class="lead">
-            A clean starter project ready for you to customize. Edit the files in
-            <code>src/</code> and watch your changes appear instantly.
-          </p>
-          <div class="cta-row">
-            <a href="#features" class="btn btn-primary">Get started</a>
-            <a href="#about" class="btn btn-ghost">Learn more</a>
-          </div>
-        </div>
-      </section>
+    <label>Weekly Goal (minutes):</label>
+    <input type="number" id="goalInput" placeholder="Enter weekly goal">
 
-      <section id="about" class="section">
-        <div class="container">
-          <h2>About this project</h2>
-          <p>
-            This is a simple website built with plain HTML, CSS, and JavaScript.
-            No frameworks, no build tools to learn — just the fundamentals of the
-            web. Use it as a foundation for your own ideas.
-          </p>
-        </div>
-      </section>
+    <label>Today's Fitness Minutes:</label>
+    <input type="number" id="dailyInput" placeholder="Enter today's minutes">
 
-      <section id="features" class="section section-alt">
-        <div class="container">
-          <h2>Features</h2>
-          <div class="features-grid">
-            <article class="feature-card">
-              <h3>Semantic HTML</h3>
-              <p>Clean, accessible structure using meaningful tags.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Modern CSS</h3>
-              <p>Flexbox, grid, and CSS variables for easy theming.</p>
-            </article>
-            <article class="feature-card">
-              <h3>Vanilla JavaScript</h3>
-              <p>Lightweight interactivity without any dependencies.</p>
-            </article>
-          </div>
+    <button onclick="addFitness()">Submit</button>
 
-          <div class="counter-card">
-            <h3>Try the interactive counter</h3>
-            <p>This little widget is wired up in <code>src/script.js</code>.</p>
-            <div class="counter">
-              <button id="decrement" class="btn btn-ghost" aria-label="Decrement">−</button>
-              <span id="count" class="count">0</span>
-              <button id="increment" class="btn btn-primary" aria-label="Increment">+</button>
-            </div>
-          </div>
-        </div>
-      </section>
+    <h2 id="progress">Progress: 0 minutes</h2>
+    <h3 id="feedback"></h3>
+  </div>
 
-      <section id="contact" class="section">
-        <div class="container">
-          <h2>Get in touch</h2>
-          <p>Ready to make this your own? Start by editing the files below.</p>
-          <ul class="file-list">
-            <li><code>index.html</code> — page structure and content</li>
-            <li><code>src/styles.css</code> — colors, layout, and typography</li>
-            <li><code>src/script.js</code> — interactivity and behavior</li>
-          </ul>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>&copy; <span id="year"></span> My Website. Built with HTML, CSS &amp; JavaScript.</p>
-      </div>
-    </footer>
-
-    <script type="module" src="/src/script.js"></script>
-  </body>
+  <script src="/src/script.js"></script>
+</body>
 </html>

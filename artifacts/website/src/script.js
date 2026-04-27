@@ -1,49 +1,29 @@
-// Set the year in the footer
-const yearEl = document.getElementById("year");
-if (yearEl) {
-  yearEl.textContent = new Date().getFullYear();
-}
+let totalMinutes = 0;
 
-// Theme toggle (light / dark)
-const themeToggle = document.getElementById("theme-toggle");
-const themeIcon = themeToggle?.querySelector(".theme-icon");
-const STORAGE_KEY = "theme-preference";
+function addFitness() {
+  const goal = parseInt(document.getElementById("goalInput").value);
+  const daily = parseInt(document.getElementById("dailyInput").value);
 
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  if (themeIcon) {
-    themeIcon.textContent = theme === "dark" ? "Light" : "Dark";
+  if (isNaN(goal) || isNaN(daily)) {
+    alert("Please enter valid numbers.");
+    return;
+  }
+
+  totalMinutes += daily;
+
+  document.getElementById("progress").innerText =
+    "Progress: " + totalMinutes + " / " + goal + " minutes";
+
+  let remaining = goal - totalMinutes;
+
+  if (remaining <= 0) {
+    document.getElementById("feedback").innerText =
+      "Congratulations! You’ve reached your weekly goal!";
+  } else {
+    let avgNeeded = Math.ceil(remaining / 7);
+
+    document.getElementById("feedback").innerText =
+      "You need " + remaining + " more minutes this week (~" +
+      avgNeeded + " min/day).";
   }
 }
-
-const savedTheme =
-  localStorage.getItem(STORAGE_KEY) ||
-  (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-applyTheme(savedTheme);
-
-themeToggle?.addEventListener("click", () => {
-  const current = document.documentElement.getAttribute("data-theme") || "light";
-  const next = current === "dark" ? "light" : "dark";
-  applyTheme(next);
-  localStorage.setItem(STORAGE_KEY, next);
-});
-
-// Interactive counter
-let count = 0;
-const countEl = document.getElementById("count");
-const incrementBtn = document.getElementById("increment");
-const decrementBtn = document.getElementById("decrement");
-
-function renderCount() {
-  if (countEl) countEl.textContent = String(count);
-}
-
-incrementBtn?.addEventListener("click", () => {
-  count += 1;
-  renderCount();
-});
-
-decrementBtn?.addEventListener("click", () => {
-  count -= 1;
-  renderCount();
-});
