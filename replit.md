@@ -16,6 +16,13 @@ pnpm workspace monorepo using TypeScript. Each package manages its own dependenc
 - **API codegen**: Orval (from OpenAPI spec)
 - **Build**: esbuild (CJS bundle)
 
+## Artifacts
+
+- `website` — Basic vanilla HTML/CSS/JS website served via Vite. Files live in
+  `artifacts/website/index.html`, `artifacts/website/src/styles.css`, and
+  `artifacts/website/src/script.js`. Includes a hero, features grid,
+  interactive counter, and light/dark theme toggle.
+
 ## Key Commands
 
 - `pnpm run typecheck` — full typecheck across all packages
