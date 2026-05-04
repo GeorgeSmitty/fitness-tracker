@@ -1,10 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fitness Tracker</title>
-  <link rel="stylesheet" href="styles.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="./styles.css">
+
+  <!-- fallback styling so it NEVER looks broken -->
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e293b);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .landing {
+      max-width: 650px;
+      padding: 40px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    p {
+      opacity: 0.85;
+    }
+
+    ul {
+      text-align: left;
+      margin: 20px auto;
+      max-width: 400px;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 24px;
+      background: #22c55e;
+      color: black;
+      font-weight: bold;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+      background: #16a34a;
+    }
+
+    .credit {
+      margin-top: 20px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+  </style>
 </head>
+
 <body>
 
 <div class="landing">
@@ -24,7 +93,8 @@
 
   <p class="credit">Created by George Smith</p>
 
-  <a class="btn" href="app.html">
+  <!-- IMPORTANT FIX: use relative path -->
+  <a class="btn" href="./app.html">
     Start Tracking
   </a>
 </div>
