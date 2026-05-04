@@ -11,50 +11,31 @@ jobs:
     name: Build and Deploy Job
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # Enable pnpm
-      - name: Enable Corepack
-        run: corepack enable
-
-      # Setup Node
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      # Install dependencies (FIXED for your lockfile issue)
-      - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
-
-      # Build app
-      - name: Build app
-        run: pnpm run build
-
-      # Deploy
-      - name: Deploy to Azure Static Web Apps
+      # DO NOT let Azure run npm at all
+      - name: Deploy only (skip all builds)
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_WAVE_01AA5BC10 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: upload
 
-          # IMPORTANT: correct source folder
+          # your actual site folder
           app_location: "artifacts/website"
 
           api_location: ""
 
-          # IMPORTANT FIX: let Azure handle output (removes dist confusion)
-          output_location: ""
+          # CRITICAL: prevents Azure Oryx build (THIS FIXES catalog error)
+          skip_app_build: true
+          skip_api_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
     name: Close Pull Request Job
     steps:
-      - name: Close Pull Request
-        uses: Azure/static-web-apps-deploy@v1
+      - uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_WAVE_01AA5BC10 }}
           action: close
