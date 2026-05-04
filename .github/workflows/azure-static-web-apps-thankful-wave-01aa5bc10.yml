@@ -8,22 +8,27 @@ on:
 jobs:
   build_and_deploy_job:
     runs-on: ubuntu-latest
+    name: Build and Deploy Job
 
     steps:
       - uses: actions/checkout@v4
 
+      # Enable pnpm (your project requires it)
+      - name: Enable Corepack (pnpm)
+        run: corepack enable
+
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
 
-      - name: Install dependencies
-        run: npm install
+      - name: Install dependencies (pnpm)
+        run: pnpm install
 
-      - name: Build project
-        run: npm run build
+      - name: Build app
+        run: pnpm run build
 
-      - name: Deploy
+      - name: Deploy to Azure Static Web Apps
         uses: Azure/static-web-apps-deploy@v1
         with:
           azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_WAVE_01AA5BC10 }}
@@ -32,3 +37,15 @@ jobs:
           app_location: "artifacts/website"
           api_location: ""
           output_location: "dist"
+          skip_app_build: true
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_THANKFUL_WAVE_01AA5BC10 }}
+          action: close
